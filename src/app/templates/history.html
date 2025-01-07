@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="form-container">
+        <h2>Upload History</h2>
+        <div class="image-grid">
+            {% for image in images %}
+                <div>
+                    <img src="{{ url_for('static', filename='uploads/' ~ image.image_file) }}" alt="Uploaded Image">
+                    <p>{{ image.date_posted.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

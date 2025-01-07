@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="form-container">
+        <h2>Profile</h2>
+        <p>Username: {{ current_user.username }}</p>
+        <p>Email: {{ current_user.email }}</p>
+        <p>Credits: {{ current_user.credits }}</p>
+        <img src="{{ url_for('static', filename='uploads/' ~ current_user.image_file) }}" class="rounded-circle" height="100" alt="Profile Image">
+        <form action="{{ url_for('main.buy_credits') }}" method="POST">
+            <script
+                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="{{ config.STRIPE_API_KEY }}"
+                data-amount="1000"
+                data-name="Buy Credits"
+                data-description="10 credits for $10"
+                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                data-locale="auto"
+                data-currency="usd">
+            </script>
+        </form>
+        <a class="btn btn-secondary mt-3" href="{{ url_for('main.history') }}">View Upload History</a>
+    </div>
+{% endblock %}
